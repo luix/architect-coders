@@ -1,4 +1,4 @@
-package mx.luix.domain
+package mx.luix.mymovies.domain
 
 data class Movie(
     val id: Int,
