@@ -38,4 +38,17 @@ class RegionRepositoryTest {
             assertEquals(RegionRepository.DEFAULT_REGION, region)
         }
     }
+
+    @Test
+    fun `returns region from location data source when permission granted`() {
+        runBlocking {
+
+            whenever(permissionChecker.check(COARSE_LOCATION)).thenReturn(true)
+            whenever(locationDataSource.findLastRegion()).thenReturn("ES")
+
+            val region = regionRepository.findLastRegion()
+
+            assertEquals("ES", region)
+        }
+    }
 }
