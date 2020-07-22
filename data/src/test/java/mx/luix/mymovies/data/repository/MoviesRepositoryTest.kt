@@ -65,4 +65,17 @@ class MoviesRepositoryTest {
             verify(localDataSource).saveMovies(remoteMovies)
         }
     }
+
+    @Test
+    fun `findById calls local data source`() {
+        runBlocking {
+
+            val movie = mockedMovie.copy(id = 5)
+            whenever(localDataSource.findById(5)).thenReturn(movie)
+
+            val result = moviesRepository.findById(5)
+
+            assertEquals(movie, result)
+        }
+    }
 }
