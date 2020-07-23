@@ -78,4 +78,16 @@ class MoviesRepositoryTest {
             assertEquals(movie, result)
         }
     }
+
+    @Test
+    fun `update updates local data source`() {
+        runBlocking {
+
+            val movie = mockedMovie.copy(id = 1)
+
+            moviesRepository.update(movie)
+
+            verify(localDataSource).update(movie)
+        }
+    }
 }
