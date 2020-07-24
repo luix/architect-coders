@@ -4,6 +4,7 @@ import com.nhaarman.mockitokotlin2.verify
 import kotlinx.coroutines.runBlocking
 import mx.luix.mymovies.data.repository.MoviesRepository
 import mx.luix.mymovies.testshared.mockedMovie
+import org.junit.Assert.assertFalse
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -32,6 +33,18 @@ class ToggleMovieFavoriteTest {
             val result = toggleMovieFavorite.invoke(movie)
 
             verify(moviesRepository).update(result)
+        }
+    }
+
+    @Test
+    fun `favorite movie becomes unfavorite`() {
+        runBlocking {
+
+            val movie = mockedMovie.copy(favorite = true)
+
+            val result = toggleMovieFavorite.invoke(movie)
+
+            assertFalse(result.favorite)
         }
     }
 }
