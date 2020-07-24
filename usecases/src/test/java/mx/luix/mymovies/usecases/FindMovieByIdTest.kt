@@ -15,7 +15,7 @@ class FindMovieByIdTest {
     lateinit var findMovieById: FindMovieById
 
     @Before
-    fun setup() {
+    fun setUp() {
         findMovieById = FindMovieById(moviesRepository)
     }
 }
