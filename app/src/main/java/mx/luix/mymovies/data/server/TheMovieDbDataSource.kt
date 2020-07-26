@@ -1,8 +1,8 @@
 package mx.luix.mymovies.data.server
 
 import mx.luix.mymovies.data.source.RemoteDataSource
+import mx.luix.mymovies.data.toDomainMovie
 import mx.luix.mymovies.domain.Movie
-import toDomainMovie
 
 class TheMovieDbDataSource(private val theMovieDb: TheMovieDb) : RemoteDataSource {
 
