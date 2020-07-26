@@ -3,9 +3,9 @@ package mx.luix.mymovies.data.database
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import mx.luix.mymovies.data.source.LocalDataSource
+import mx.luix.mymovies.data.toDomainMovie
+import mx.luix.mymovies.data.toRoomMovie
 import mx.luix.mymovies.domain.Movie
-import toDomainMovie
-import toRoomMovie
 
 class RoomDataSource(db: MovieDatabase) : LocalDataSource {
 
