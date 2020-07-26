@@ -59,7 +59,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 tools:text="Lorem ipsum" />
 
-            <com.antonioleiva.mymovies.ui.detail.MovieDetailInfoView
+            <mx.luix.mymovies.ui.detail.MovieDetailInfoView
                 android:id="@+id/movieDetailInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
