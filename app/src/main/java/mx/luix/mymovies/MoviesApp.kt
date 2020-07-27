@@ -6,6 +6,6 @@ class MoviesApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        // ToDo:  initDI()
+        initDI()
     }
 }
