@@ -1,6 +1,6 @@
 package mx.luix.mymovies.ui
 
-import com.nhaarman.mockitokotlin2.mock
+import mx.luix.mymovies.data.repository.PermissionChecker
 import mx.luix.mymovies.data.source.LocalDataSource
 import mx.luix.mymovies.data.source.LocationDataSource
 import mx.luix.mymovies.data.source.RemoteDataSource
@@ -49,3 +49,9 @@ class FakeLocationDataSource : LocationDataSource {
     override suspend fun findLastRegion(): String? = location
 }
 
+class FakePermissionChecker : PermissionChecker {
+    var permissionGranted = true
+
+    override suspend fun check(permission: PermissionChecker.Permission): Boolean =
+        permissionGranted
+}
