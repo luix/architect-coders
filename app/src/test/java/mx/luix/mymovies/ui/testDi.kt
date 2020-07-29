@@ -1,14 +1,33 @@
 package mx.luix.mymovies.ui
 
+import kotlinx.coroutines.Dispatchers
 import mx.luix.mymovies.data.repository.PermissionChecker
 import mx.luix.mymovies.data.source.LocalDataSource
 import mx.luix.mymovies.data.source.LocationDataSource
 import mx.luix.mymovies.data.source.RemoteDataSource
+import mx.luix.mymovies.dataModule
 import mx.luix.mymovies.domain.Movie
 import mx.luix.mymovies.testshared.mockedMovie
 import org.koin.core.context.startKoin
+import org.koin.core.module.Module
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
+
+
+fun initMockedDi(vararg modules: Module) {
+    startKoin {
+        modules(listOf(mockedAppModule, dataModule) + modules)
+    }
+}
+
+private val mockedAppModule = module {
+    single(named("apiKey")) { "123456" }
+    single<LocalDataSource> { FakeLocalDataSource() }
+    single<RemoteDataSource> { FakeRemoteDataSource() }
+    single<LocationDataSource> { FakeLocationDataSource() }
+    single<PermissionChecker> { FakePermissionChecker() }
+    single { Dispatchers.Unconfined }
+}
 
 val defaultFakeMovies = listOf(
     mockedMovie.copy(1),
