@@ -2,6 +2,7 @@ package mx.luix.mymovies.ui
 
 import com.nhaarman.mockitokotlin2.mock
 import mx.luix.mymovies.data.source.LocalDataSource
+import mx.luix.mymovies.data.source.LocationDataSource
 import mx.luix.mymovies.data.source.RemoteDataSource
 import mx.luix.mymovies.domain.Movie
 import mx.luix.mymovies.testshared.mockedMovie
@@ -40,5 +41,11 @@ class FakeRemoteDataSource : RemoteDataSource {
     var movies = defaultFakeMovies
 
     override suspend fun getPopularMovies(apiKey: String, region: String) = movies
+}
+
+class FakeLocationDataSource : LocationDataSource {
+    var location = "US"
+
+    override suspend fun findLastRegion(): String? = location
 }
 
