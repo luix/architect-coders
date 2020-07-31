@@ -46,7 +46,6 @@ class MainViewModelTest {
     @Test
     fun `after requesting the permission, loading is shown`() {
         runBlocking {
-
             val movies = listOf(mockedMovie.copy(id = 1))
             whenever(getPopularMovies.invoke()).thenReturn(movies)
             vm.model.observeForever(observer)
@@ -54,6 +53,20 @@ class MainViewModelTest {
             vm.onCoarsePermissionRequested()
 
             verify(observer).onChanged(UiModel.Loading)
+        }
+    }
+
+    @Test
+    fun `after requesting the permission, getPopularMovies is called`() {
+        runBlocking {
+            val movies = listOf(mockedMovie.copy(id = 1))
+            whenever(getPopularMovies.invoke()).thenReturn(movies)
+
+            vm.model.observeForever(observer)
+
+            vm.onCoarsePermissionRequested()
+
+            verify(observer).onChanged(UiModel.Content(movies))
         }
     }
 }
