@@ -3,7 +3,10 @@ package mx.luix.mymovies.ui.main
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import mx.luix.mymovies.testshared.mockedMovie
 import mx.luix.mymovies.usecases.GetPopularMovies
 import mx.luix.mymovies.ui.main.MainViewModel.UiModel
 import org.junit.Before
@@ -38,5 +41,19 @@ class MainViewModelTest {
         vm.model.observeForever(observer)
 
         verify(observer).onChanged(UiModel.RequestLocationPermission)
+    }
+
+    @Test
+    fun `after requesting the permission, loading is shown`() {
+        runBlocking {
+
+            val movies = listOf(mockedMovie.copy(id = 1))
+            whenever(getPopularMovies.invoke()).thenReturn(movies)
+            vm.model.observeForever(observer)
+
+            vm.onCoarsePermissionRequested()
+
+            verify(observer).onChanged(UiModel.Loading)
+        }
     }
 }
